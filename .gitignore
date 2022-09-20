@@ -1,0 +1,9 @@
+/devserver
+/docs
+/node_modules
+/out/
+/build
+public/static/*
+dist
+combined.log
+.env

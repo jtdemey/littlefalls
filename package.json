@@ -1,0 +1,26 @@
+{
+  "name": "littlefalls",
+  "version": "1.0.0",
+  "description": "Little Falls Friends Meeting House",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "scripts": {
+    "dev": "node src/server/server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "John Torsten",
+  "license": "ISC",
+  "devDependencies": {
+    "better-sqlite3": "^7.6.2",
+    "dotenv": "^16.0.2",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "express-rate-limit": "^6.6.0",
+    "morgan": "^1.10.0",
+    "vite": "^3.1.2",
+    "winston": "^3.8.2"
+  },
+  "type": "module"
+}
