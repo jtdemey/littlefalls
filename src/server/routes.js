@@ -22,6 +22,7 @@ const routeHtml = (endpoint, fileName) =>
   });
 
 routeHtml("/", "home");
+routeHtml("/schedule", "schedule");
 routeHtml("/about-quakerism", "about");
 routeHtml("/documents", "documents");
 routeHtml("/our-history", "history");
