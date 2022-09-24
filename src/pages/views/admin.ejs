@@ -13,9 +13,14 @@
 
       <h3>Admin</h3>
 
-      <ul id="admin-commands">
+      <h4>Change Schedule</h4>
 
-      </ul>
+      <div id="schedule-grid">
+        <% schedule.forEach(timeslot => { %>
+          <div><%= timeslot.date %></div>
+          <div><%= timeslot.agenda %></div>
+        <% }); %>
+      </div>
 
     </div>
 

@@ -155,6 +155,25 @@ nav > ul > a > li:hover {
   background: hsl(210, 11%, 96%);
 }
 
+/* Schedule */
+#schedule-grid {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  margin: 1rem;
+  border: 1px solid hsl(210, 25%, 10%);
+  font-family: "Gentium Basic", Georgia, "Times New Roman", Times, serif;
+  font-size: 1.1rem;
+}
+
+#schedule-grid > div {
+  padding: 0.5rem;
+  border-bottom: 1px solid hsl(210, 15%, 40%);
+}
+
+#schedule-grid > div:nth-child(odd) {
+  border-right: 1px solid hsl(210, 8%, 50%);
+}
+
 @media all and (min-width: 960px) {
   #nav-btn {
     display: none;
