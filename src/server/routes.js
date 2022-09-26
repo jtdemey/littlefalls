@@ -14,13 +14,26 @@ const renderHtmlFile = (res, fileName, props) => {
     res.render(path.join(process.cwd(), "public", "static", fileName), props);
     return;
   }
-  res.render(path.join(process.cwd(), "src", "pages", "views", fileName), props);
+  res.render(
+    path.join(process.cwd(), "src", "pages", "views", fileName),
+    props
+  );
 };
+
+const routeGetApi = (endpoint, action) =>
+  router.route(endpoint).get((req, res) => action(req, res));
 
 const routeHtml = (endpoint, fileName, getProps) =>
   router.route(endpoint).get((req, res) => {
-    renderHtmlFile(res, fileName, getProps());
+    renderHtmlFile(res, fileName, getProps ? getProps() : {});
   });
+
+routeGetApi("/api/schedule", (req, res) => {
+  const schedule = getSchedule();
+  res.json({
+    schedule
+  });
+});
 
 routeHtml("/", "home");
 routeHtml("/schedule", "schedule", () => ({

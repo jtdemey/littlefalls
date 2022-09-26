@@ -15,12 +15,8 @@
 
       <h4>Change Schedule</h4>
 
-      <div id="schedule-grid">
-        <% schedule.forEach(timeslot => { %>
-          <div><%= timeslot.date %></div>
-          <div><%= timeslot.agenda %></div>
-        <% }); %>
-      </div>
+      <div id="schedule-grid"></div>
+      <div class="btn" id="add-schedule-btn">+ Add new row</div>
 
     </div>
 
