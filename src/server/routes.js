@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import dotenv from "dotenv";
 import getSchedule from "../db/services/schedule/get.js";
+import setSchedule from "../db/services/schedule/set.js";
 dotenv.config({
   silent: true
 });
@@ -33,6 +34,19 @@ routeGetApi("/api/schedule", (req, res) => {
   res.json({
     schedule
   });
+});
+
+router.route("/api/schedule/set").post((req, res) => {
+  if (!req || !req.body || !req.body.schedule) return;
+  if (req.body.schedule.length > 20) {
+    res.status(400).json({
+      message: "Max length exceeded"
+    });
+  }
+  setSchedule(req.body.schedule);
+  res.status(201).json({
+    message: "Created"
+  })
 });
 
 routeHtml("/", "home");

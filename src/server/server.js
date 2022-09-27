@@ -12,6 +12,7 @@ const port = process.env.SERVER_PORT || 3001;
     const app = express();
     app.set("view engine", "ejs");
     app.use(morgan("short"));
+    app.use(express.json());
     app.use("/", router);
 		app.use(express.static(dev ? "src" : "dist"));
     process.on("SIGINT", () => process.exit());

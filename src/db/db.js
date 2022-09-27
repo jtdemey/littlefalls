@@ -6,7 +6,7 @@ const db = new Database("littlefalls.db", { verbose: logger.info });
 
 export const executeTransaction = (query, entity) => {
   const statement = db.prepare(removeNewlines(query));
-  const transaction = db.transaction(() => statement.run(entity));
+  const transaction = db.transaction(() => entity ? statement.run(entity) : statement.run());
   transaction();
 };
 
