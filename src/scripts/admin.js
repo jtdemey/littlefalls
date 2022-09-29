@@ -1,5 +1,7 @@
 const addScheduleBtn = document.getElementById("add-schedule-btn");
 const scheduleGrid = document.getElementById("schedule-grid");
+const scheduleStatus = document.getElementById("schedule-status");
+const saveScheduleBtn = document.getElementById("save-schedule-btn");
 
 const addScheduleRow = scheduleRow => {
   const makeEditableDiv = text => {
@@ -11,7 +13,6 @@ const addScheduleRow = scheduleRow => {
   const dateElem = makeEditableDiv(scheduleRow.date);
   const agendaElem = makeEditableDiv(scheduleRow.agenda);
   const btnContainer = document.createElement("div");
-  //PostCSS ignore?
   btnContainer.classList.add("del-btn-container");
   const delBtn = document.createElement("a");
   delBtn.href = `/api/schedule/remove/${scheduleRow.id}`;
@@ -22,28 +23,8 @@ const addScheduleRow = scheduleRow => {
 
 const apiErr = endpoint => console.error(`API /api/${endpoint} failed`);
 
-const createSchedule = () => {
-  fetch("/api/schedule/create", {
-    method: "POST",
-    headers: {
-      Accept: "application/json",
-      "Content-Type": "application/json"
-    },
-    body: JSON.stringify({
-      date: "[Date]",
-      agenda: "[Agenda]"
-    })
-  })
-    .then(res => res.json())
-    .then(res => {
-      if (!res || !res.status || res.status !== 201) {
-        apiErr("schedule/create");
-        return;
-      }
-      //addScheduleRow({})
-    })
-    .catch(reason => console.error(reason));
-};
+const createSchedule = () =>
+  addScheduleRow({ date: "[Date]", agenda: "[Agenda]" });
 
 addScheduleBtn.addEventListener("click", () => createSchedule());
 
@@ -51,7 +32,7 @@ const refreshSchedule = () => {
   fetch("/api/schedule")
     .then(res => res.json())
     .then(res => {
-      if (!res || !res.schedule) {
+      if (!res || res.schedule === undefined) {
         apiErr("schedule");
         return;
       }
@@ -62,3 +43,49 @@ const refreshSchedule = () => {
 };
 
 refreshSchedule();
+
+const getScheduleRows = () => {
+  let rowIndex = 0;
+  const scheduleRows = [];
+  const scheduleDivs = [...document.querySelectorAll("#schedule-grid > div")];
+
+  for (let i = 0; i < scheduleDivs.length / 3; i++) {
+    scheduleRows.push({ date: scheduleDivs[rowIndex].innerHTML });
+    rowIndex += 3;
+  }
+
+  rowIndex = 1;
+  scheduleRows.forEach(row => {
+    row.agenda = scheduleDivs[rowIndex].innerHTML;
+    rowIndex += 3;
+  });
+
+  return scheduleRows;
+};
+
+const setSchedule = () => {
+  const rows = getScheduleRows();
+  console.log(rows);
+  fetch("/api/schedule/set", {
+    method: "POST",
+    headers: {
+      Accept: "application/json",
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify({
+      schedule: rows
+    })
+  })
+    .then(res => res.json())
+    .then(res => {
+      if (!res || !res.status || res.status !== 201) {
+        apiErr("schedule/create");
+        return;
+      }
+      console.log(res);
+      scheduleStatus.innerHTML = `Schedule updated on ${new Date().toDateString()}`;
+    })
+    .catch(reason => console.error(reason));
+};
+
+saveScheduleBtn.addEventListener("click", () => setSchedule());

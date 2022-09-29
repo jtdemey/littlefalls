@@ -233,6 +233,10 @@ nav > ul > a > li:hover {
   border-right: 1px solid hsl(210, 8%, 50%);
 }
 
+#save-schedule-btn {
+  margin: 1rem auto;
+}
+
 @media all and (min-width: 960px) {
   #nav-btn {
     display: none;

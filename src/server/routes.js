@@ -30,13 +30,13 @@ const routeHtml = (endpoint, fileName, getProps) =>
   });
 
 routeGetApi("/api/schedule", (req, res) => {
-  const schedule = getSchedule();
-  res.json({
-    schedule
+  res.status(200).json({
+    schedule: getSchedule()
   });
 });
 
 router.route("/api/schedule/set").post((req, res) => {
+  console.log(req.body);
   if (!req || !req.body || !req.body.schedule) return;
   if (req.body.schedule.length > 20) {
     res.status(400).json({
@@ -46,7 +46,7 @@ router.route("/api/schedule/set").post((req, res) => {
   setSchedule(req.body.schedule);
   res.status(201).json({
     message: "Created"
-  })
+  });
 });
 
 routeHtml("/", "home");
@@ -60,8 +60,6 @@ routeHtml("/marriage-equality", "equality");
 routeHtml("/jedi", "jedi");
 routeHtml("/links", "links");
 routeHtml("/contact-us", "contact");
-routeHtml("/admin", "admin", () => ({
-  schedule: getSchedule()
-}));
+routeHtml("/admin", "admin");
 
 export default router;

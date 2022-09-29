@@ -9,15 +9,19 @@
 
     <%- include("../partials/banner") %>
 
-    <div id="content">
+    <div id="modal-area">
+      <div id="content">
 
-      <h3>Admin</h3>
+        <h3>Admin</h3>
 
-      <h4>Change Schedule</h4>
+        <h4>Change Schedule</h4>
 
-      <div class="admin-schedule" id="schedule-grid"></div>
-      <div class="btn" id="add-schedule-btn">+ Add new row</div>
+        <div id="schedule-status"></div> 
+        <div class="admin-schedule" id="schedule-grid"></div>
+        <div class="btn" id="add-schedule-btn">+ Add new row</div>
+        <div class="btn" id="save-schedule-btn">Save Schedule</div>
 
+      </div>
     </div>
 
     <script src="../../scripts/admin.js" defer type="module"></script>
