@@ -15,8 +15,12 @@ const addScheduleRow = scheduleRow => {
   const btnContainer = document.createElement("div");
   btnContainer.classList.add("del-btn-container");
   const delBtn = document.createElement("a");
-  delBtn.href = `/api/schedule/remove/${scheduleRow.id}`;
   delBtn.innerHTML = `<span class="del-btn">Delete</span>`;
+  delBtn.addEventListener("click", () => {
+    dateElem.remove();
+    agendaElem.remove();
+    btnContainer.remove();
+  });
   btnContainer.append(delBtn);
   scheduleGrid.append(dateElem, agendaElem, btnContainer);
 };
@@ -78,12 +82,14 @@ const setSchedule = () => {
   })
     .then(res => res.json())
     .then(res => {
-      if (!res || !res.status || res.status !== 201) {
+      if (!res || !res.message) {
         apiErr("schedule/create");
         return;
       }
-      console.log(res);
-      scheduleStatus.innerHTML = `Schedule updated on ${new Date().toDateString()}`;
+      const ts = new Date().toLocaleString("en-US", {
+        timeZone: "America/New_York"
+      });
+      scheduleStatus.innerHTML = `| Schedule updated on ${ts}`;
     })
     .catch(reason => console.error(reason));
 };

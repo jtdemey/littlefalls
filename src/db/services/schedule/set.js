@@ -11,7 +11,7 @@ const set = schedule => {
   console.log(values);
   executeTransaction(
     `INSERT INTO schedule (date, agenda) VALUES ${placeholders.join("")}`,
-    schedule.map(row => [row.date, row.agenda])
+    values
   );
   /*
   schedule.forEach(scheduleRow => {

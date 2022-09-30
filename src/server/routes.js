@@ -37,11 +37,17 @@ routeGetApi("/api/schedule", (req, res) => {
 
 router.route("/api/schedule/set").post((req, res) => {
   console.log(req.body);
-  if (!req || !req.body || !req.body.schedule) return;
+  if (!req || !req.body || !req.body.schedule) {
+    res.status(401).json({
+      message: "Operation not allowed"
+    });
+    return;
+  }
   if (req.body.schedule.length > 20) {
-    res.status(400).json({
+    res.status(401).json({
       message: "Max length exceeded"
     });
+    return;
   }
   setSchedule(req.body.schedule);
   res.status(201).json({

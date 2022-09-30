@@ -7,21 +7,27 @@
 
   <body>
 
+    <div id="modal-area">
+      <span>x</span>
+      <section>
+        Password:
+        <input type="text" />
+        <div class="btn">Submit</div>
+      </section>
+    </div>
+
     <%- include("../partials/banner") %>
 
-    <div id="modal-area">
-      <div id="content">
+    <div id="content">
 
-        <h3>Admin</h3>
+      <h3>Admin</h3>
 
-        <h4>Change Schedule</h4>
+      <h4>Change Schedule<span id="schedule-status"></span></h4>
 
-        <div id="schedule-status"></div> 
-        <div class="admin-schedule" id="schedule-grid"></div>
-        <div class="btn" id="add-schedule-btn">+ Add new row</div>
-        <div class="btn" id="save-schedule-btn">Save Schedule</div>
+      <div class="admin-schedule" id="schedule-grid"></div>
+      <div class="btn" id="add-schedule-btn">+ Add new row</div>
+      <div class="btn" id="save-schedule-btn">Save Schedule</div>
 
-      </div>
     </div>
 
     <script src="../../scripts/admin.js" defer type="module"></script>

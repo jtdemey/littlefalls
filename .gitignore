@@ -8,3 +8,5 @@ dist
 combined.log
 .env
 littlefalls.db
+littlefalls.db-shm
+littlefalls.db-wal
