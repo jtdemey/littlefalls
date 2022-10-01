@@ -8,19 +8,10 @@ const set = schedule => {
   const values = schedule.reduce((acc, next) => {
     return acc.concat([next.date]).concat([next.agenda]);
   }, []);
-  console.log(values);
   executeTransaction(
     `INSERT INTO schedule (date, agenda) VALUES ${placeholders.join("")}`,
     values
   );
-  /*
-  schedule.forEach(scheduleRow => {
-    executeTransaction(
-      `INSERT INTO schedule (date, agenda) VALUES (@date, @agenda)`,
-      { ...scheduleRow }
-    );
-  });
-  */
 };
 
 export default set;

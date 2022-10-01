@@ -180,6 +180,10 @@ h4 {
   display: flex;
 }
 
+.hidden {
+  display: none;
+}
+
 /* Banner */
 #banner {
   padding-top: 1.3rem;
@@ -285,7 +289,6 @@ nav > ul > a > li:hover {
 
 /* Confirmation modal */
 #modal-area {
-  display: flex;
   align-items: center;
   justify-content: center;
   position: fixed;
@@ -293,23 +296,37 @@ nav > ul > a > li:hover {
   left: 0px;
   width: 100vw;
   height: 100vh;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.4);
 }
 
 #modal-area > section {
-  padding: 4rem;
   background: hsl(205, 8%, 94%);
   border-radius: 4px;
 }
 
-#modal-area > section > span {
-  position: relative;
-  top: 0px;
-  right: 0px;
+#x-row {
+  display: flex;
+  justify-content: right;
+  margin-bottom: 0.35rem;
+  padding: 0 0.5rem;
+}
+
+#x-row > span {
+  cursor: pointer;
+  font-size: 2rem;
+}
+
+#modal-area > section > section {
+  padding: 0 1.5rem;
+}
+
+#modal-area > section > section > input {
+  margin: 1rem 0;
+  padding: 0.35rem;
 }
 
 #modal-area .btn {
-  margin: 1rem auto 0;
+  margin: 0 auto 1rem;
 }
 
 /* Schedule */

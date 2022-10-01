@@ -1,8 +1,34 @@
 const addScheduleBtn = document.getElementById("add-schedule-btn");
+const closeModalX = document.querySelector("#x-row > span");
+const modalArea = document.getElementById("modal-area");
+const modalContent = document.querySelector("#modal-area > section");
+const modalSubmitBtn = document.getElementById("modal-submit");
 const scheduleGrid = document.getElementById("schedule-grid");
 const scheduleStatus = document.getElementById("schedule-status");
 const saveScheduleBtn = document.getElementById("save-schedule-btn");
 
+// Util
+const apiErr = endpoint => console.error(`API /api/${endpoint} failed`);
+
+// Modal
+let modalSubmit = () => {};
+
+const hideModal = () => {
+  modalArea.classList.remove("flex");
+  modalArea.classList.add("hidden");
+};
+const showModal = submitFunc => {
+  modalSubmit = submitFunc;
+  modalArea.classList.remove("hidden");
+  modalArea.classList.add("flex");
+};
+
+modalArea.addEventListener("click", () => hideModal());
+modalContent.addEventListener("click", e => e.stopPropagation());
+closeModalX.addEventListener("click", () => hideModal());
+modalSubmitBtn.addEventListener("click", () => modalSubmit());
+
+// Schedule
 const addScheduleRow = scheduleRow => {
   const makeEditableDiv = text => {
     const elem = document.createElement("div");
@@ -24,8 +50,6 @@ const addScheduleRow = scheduleRow => {
   btnContainer.append(delBtn);
   scheduleGrid.append(dateElem, agendaElem, btnContainer);
 };
-
-const apiErr = endpoint => console.error(`API /api/${endpoint} failed`);
 
 const createSchedule = () =>
   addScheduleRow({ date: "[Date]", agenda: "[Agenda]" });
@@ -69,7 +93,7 @@ const getScheduleRows = () => {
 
 const setSchedule = () => {
   const rows = getScheduleRows();
-  console.log(rows);
+  const secret = document.getElementById("modal-input").value;
   fetch("/api/schedule/set", {
     method: "POST",
     headers: {
@@ -77,21 +101,27 @@ const setSchedule = () => {
       "Content-Type": "application/json"
     },
     body: JSON.stringify({
-      schedule: rows
+      schedule: rows,
+      secret
     })
   })
     .then(res => res.json())
     .then(res => {
-      if (!res || !res.message) {
+      hideModal();
+      if (!res || !res.message || !res.status) {
         apiErr("schedule/create");
+        return;
+      }
+      if (res.status === 401) {
+        scheduleStatus.innerHTML = `| [Error] Unauthorized to update schedule`;
         return;
       }
       const ts = new Date().toLocaleString("en-US", {
         timeZone: "America/New_York"
       });
-      scheduleStatus.innerHTML = `| Schedule updated on ${ts}`;
+      scheduleStatus.innerHTML = `| ✓ Schedule updated on ${ts}`;
     })
     .catch(reason => console.error(reason));
 };
 
-saveScheduleBtn.addEventListener("click", () => setSchedule());
+saveScheduleBtn.addEventListener("click", () => showModal(setSchedule));

@@ -9,6 +9,7 @@ dotenv.config({
 
 const router = express.Router();
 const isProd = process.env.NODE_ENV === "production";
+const ADMIN_KEY = process.env.ADMIN_KEY;
 
 const renderHtmlFile = (res, fileName, props) => {
   if (isProd) {
@@ -31,26 +32,36 @@ const routeHtml = (endpoint, fileName, getProps) =>
 
 routeGetApi("/api/schedule", (req, res) => {
   res.status(200).json({
+    status: 200,
     schedule: getSchedule()
   });
 });
 
 router.route("/api/schedule/set").post((req, res) => {
   console.log(req.body);
-  if (!req || !req.body || !req.body.schedule) {
+  if (
+    !req ||
+    !req.body ||
+    !req.body.schedule ||
+    !req.body.secret ||
+    req.body.secret !== ADMIN_KEY
+  ) {
     res.status(401).json({
-      message: "Operation not allowed"
+      status: 401,
+      message: "Unauthorized"
     });
     return;
   }
   if (req.body.schedule.length > 20) {
     res.status(401).json({
+      status: 401,
       message: "Max length exceeded"
     });
     return;
   }
   setSchedule(req.body.schedule);
   res.status(201).json({
+    status: 201,
     message: "Created"
   });
 });
