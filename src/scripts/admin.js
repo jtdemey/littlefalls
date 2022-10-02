@@ -2,6 +2,7 @@ const addScheduleBtn = document.getElementById("add-schedule-btn");
 const closeModalX = document.querySelector("#x-row > span");
 const modalArea = document.getElementById("modal-area");
 const modalContent = document.querySelector("#modal-area > section");
+const modalInput = document.getElementById("modal-input");
 const modalSubmitBtn = document.getElementById("modal-submit");
 const scheduleGrid = document.getElementById("schedule-grid");
 const scheduleStatus = document.getElementById("schedule-status");
@@ -21,10 +22,13 @@ const showModal = submitFunc => {
   modalSubmit = submitFunc;
   modalArea.classList.remove("hidden");
   modalArea.classList.add("flex");
+  modalInput.value = "";
+  modalInput.focus();
 };
 
 modalArea.addEventListener("click", () => hideModal());
 modalContent.addEventListener("click", e => e.stopPropagation());
+modalInput.addEventListener("keydown", e => e.key === "Enter" && modalSubmit());
 closeModalX.addEventListener("click", () => hideModal());
 modalSubmitBtn.addEventListener("click", () => modalSubmit());
 
@@ -93,7 +97,7 @@ const getScheduleRows = () => {
 
 const setSchedule = () => {
   const rows = getScheduleRows();
-  const secret = document.getElementById("modal-input").value;
+  const secret = modalInput.value;
   fetch("/api/schedule/set", {
     method: "POST",
     headers: {

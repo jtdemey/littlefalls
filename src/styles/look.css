@@ -38,7 +38,6 @@ tt,
 var,
 b,
 u,
-i,
 center,
 dl,
 dt,
@@ -124,6 +123,7 @@ table {
 /*  White: hsl(205, 8%, 94%)
  *  Mid light blue (banner): hsl(205, 60%, 31%)
  *  Mid dark blue (nav): hsl(205, 60%, 27%)
+ *  Navy dark (headers): hsl(205, 36%, 22%)
  *  Dark blue: hsl(205, 30%, 12%)
  */
 
@@ -136,14 +136,8 @@ body {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
 }
 
-h3 {
-  padding: 0.25rem 1rem;
-  font-size: 1.5rem;
-}
-
-h4 {
-  padding: 1rem;
-  font-size: 1.3rem;
+hr {
+  margin: 1.25rem 0;
 }
 
 .btn {
@@ -155,6 +149,12 @@ h4 {
   border-radius: 4px;
   color: hsl(205, 8%, 94%);
   cursor: pointer;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .del-btn {
@@ -191,7 +191,7 @@ h4 {
   text-align: center;
 }
 
-h1 {
+#banner > h1 {
   margin: 0 2.5rem;
   padding: 1.6rem 0 0.5rem;
   color: hsl(205, 8%, 94%);
@@ -202,7 +202,7 @@ h1 {
 }
 
 h2 {
-  padding: 0 0 2rem 0;
+  padding: 0 0 4rem 0;
   color: hsl(205, 8%, 94%);
   font-family: "Gentium Basic", Georgia, "Times New Roman", Times, serif;
   font-size: 1.1rem;
@@ -210,12 +210,16 @@ h2 {
 
 #nav-btn {
   padding: 1rem;
-  background: #1b4b6d;
+  background: hsl(205, 60%, 27%);
   color: hsl(205, 8%, 94%);
   cursor: pointer;
   font-weight: 750;
   font-size: 1.4rem;
   text-align: center;
+}
+
+#nav-btn:hover {
+  background: ;
 }
 
 nav {
@@ -283,8 +287,63 @@ nav > ul > a > li:hover {
 
 /* Content */
 #content {
-  padding: 1rem 0;
-  background: hsl(210, 11%, 96%);
+  background: hsl(210, 13%, 94%);
+}
+
+#content h3 {
+  margin: 2rem 0;
+  font-size: 2rem;
+}
+
+#content h4 {
+  margin: 2rem 0;
+  font-size: 1.3rem;
+}
+
+article {
+  padding: 1.85rem;
+  background: hsl(210, 19%, 97%);
+}
+
+article > h3 {
+  color: hsl(205, 36%, 22%);
+  font-size: 3rem;
+  font-weight: 750;
+}
+
+article > h4 {
+  color: hsl(205, 36%, 22%);
+  font-size: 2rem;
+  font-weight: 750;
+}
+
+article > p {
+  font-family: "Gentium Basic", Georgia, "Times New Roman", Times, serif;
+  font-size: 1.25rem;
+  line-height: 1.75rem;
+}
+
+article img {
+  margin: 0.5rem 0;
+}
+
+/* Side content */
+#side-content {
+  margin: 4rem 2rem 0;
+  padding: 1rem;
+  background: hsl(210, 11%, 88%);
+  border-radius: 0.35rem;
+}
+
+#side-content > h5 {
+  margin: 0.5rem 0 1rem;
+  font-size: 1.2rem;
+  font-weight: 750;
+}
+
+#side-content a {
+  color: hsl(210, 55%, 40%);
+  text-decoration: underline;
 }
 
 /* Confirmation modal */
@@ -367,6 +426,15 @@ nav > ul > a > li:hover {
   margin: 1rem auto;
 }
 
+/* Admin */
+.admin-content h3 {
+  padding: 0.25rem 1rem;
+}
+
+.admin-content h4 {
+  padding: 1rem;
+}
+
 @media all and (min-width: 960px) {
   #nav-btn {
     display: none;
@@ -383,5 +451,10 @@ nav > ul > a > li:hover {
   nav > ul > a > li {
     padding: 0.6rem 1rem;
     border: none;
+  }
+
+  #content-panes {
+    display: grid;
+    grid-template-columns: 70% 30%;
   }
 }

@@ -38,7 +38,6 @@ routeGetApi("/api/schedule", (req, res) => {
 });
 
 router.route("/api/schedule/set").post((req, res) => {
-  console.log(req.body);
   if (
     !req ||
     !req.body ||
