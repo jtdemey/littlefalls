@@ -134,6 +134,7 @@ a {
 
 body {
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
+  background: hsl(210, 13%, 94%);
 }
 
 hr {
@@ -197,8 +198,12 @@ hr {
   color: hsl(205, 8%, 94%);
   font-family: "Open Sans", Helvetica, Arial, sans-serif;
   font-weight: 750;
-  font-size: 1.8rem;
+  font-size: 1.85rem;
   line-height: 1.4;
+}
+
+#banner > h1:hover {
+  text-decoration: underline;
 }
 
 h2 {
@@ -292,7 +297,7 @@ nav > ul > a > li:hover {
 
 #content h3 {
   margin: 2rem 0;
-  font-size: 2rem;
+  font-size: 2.5rem;
 }
 
 #content h4 {
@@ -301,8 +306,8 @@ nav > ul > a > li:hover {
 }
 
 article {
-  padding: 1.85rem;
   background: hsl(210, 19%, 97%);
+  padding: 2rem 1rem;
 }
 
 article > h3 {
@@ -329,10 +334,13 @@ article img {
 
 /* Side content */
 #side-content {
-  margin: 4rem 2rem 0;
+  height: fit-content;
   padding: 1rem;
   background: hsl(210, 11%, 88%);
   border-radius: 0.35rem;
+  font-family: "Gentium Basic", Georgia, "Times New Roman", Times, serif;
+  font-size: 1.1rem;
+  line-height: 1.5rem;
 }
 
 #side-content > h5 {
@@ -344,6 +352,10 @@ article img {
 #side-content a {
   color: hsl(210, 55%, 40%);
   text-decoration: underline;
+}
+
+#side-content > p:last-child {
+  padding-top: 1rem;
 }
 
 /* Confirmation modal */
@@ -456,5 +468,14 @@ article img {
   #content-panes {
     display: grid;
     grid-template-columns: 70% 30%;
+    margin: 3rem;
+  }
+
+  article {
+    padding: 0 6rem;
+  }
+
+  #side-content {
+    margin-left: 2rem;
   }
 }
