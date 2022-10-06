@@ -1,8 +1,14 @@
-import db from "../db.js";
+import { executeTransaction } from "../db.js";
 import { removeNewlines } from "../../scripts/utils.js";
 
 const generate = () => {
-  const query = db.prepare(
+  const createQueries = [
+    removeNewlines(
+      `CREATE TABLE IF NOT EXISTS update_timestamps (
+        id INTEGER PRIMARY KEY AUTOINCREMENT,
+        schedule VARCHAR(64) NULL
+      )`
+    ),
     removeNewlines(
       `CREATE TABLE IF NOT EXISTS schedule (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -10,9 +16,8 @@ const generate = () => {
         agenda VARCHAR(256) NOT NULL
       )`
     )
-  );
-  const transaction = db.transaction(() => query.run());
-  transaction();
+  ];
+  createQueries.forEach(query => executeTransaction(query));
 };
 
 export default generate;

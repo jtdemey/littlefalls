@@ -260,7 +260,7 @@ nav > ul > a > li:hover {
 #breadcrumbs {
   display: flex;
   flex-flow: row;
-  padding: 2rem 0;
+  padding: 2rem 0 0;
 }
 
 #home-breadcrumb {
@@ -407,19 +407,19 @@ article img {
 
 #schedule-grid {
   display: grid;
-  margin: 1rem;
   border: 1px solid hsl(210, 25%, 10%);
   font-family: "Gentium Basic", Georgia, "Times New Roman", Times, serif;
   font-size: 1.1rem;
 }
 
 #schedule-grid > div {
-  padding: 0.5rem;
+  padding: 1rem 0.5rem;
   border-bottom: 1px solid hsl(210, 15%, 40%);
 }
 
 .admin-schedule {
   grid-template-columns: 1fr 4fr 1fr;
+  margin: 1rem;
 }
 
 .admin-schedule > div:nth-child(3n + 1) {
@@ -428,6 +428,7 @@ article img {
 
 .user-schedule {
   grid-template-columns: 1fr 4fr;
+  margin: 2rem 0 1rem;
 }
 
 .user-schedule > div:nth-child(odd) {
@@ -465,6 +466,10 @@ article img {
     border: none;
   }
 
+  #breadcrumbs {
+    margin-left: 3rem;
+  }
+
   #content-panes {
     display: grid;
     grid-template-columns: 70% 30%;
@@ -477,5 +482,9 @@ article img {
 
   #side-content {
     margin-left: 2rem;
+  }
+
+  .admin-content {
+    padding: 0 3rem;
   }
 }

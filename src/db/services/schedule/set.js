@@ -8,10 +8,16 @@ const set = schedule => {
   const values = schedule.reduce((acc, next) => {
     return acc.concat([next.date]).concat([next.agenda]);
   }, []);
+
   executeTransaction(
     `INSERT INTO schedule (date, agenda) VALUES ${placeholders.join("")}`,
     values
   );
+
+  const ts = new Date().toLocaleString("en-US", {
+    timeZone: "America/New_York"
+  });
+  //TODO: schedule update timestamp
 };
 
 export default set;
